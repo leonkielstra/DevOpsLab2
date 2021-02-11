@@ -47,3 +47,14 @@ docker build -t swagger_server .
 # starting up a container
 docker run -p 8080:8080 swagger_server
 ```
+
+## Docker repo
+After a successful build on the `main` branch, this docker image is pushed to `leonkielstra/devops-lab2`.
+
+```bash
+# Pull docker image
+docker pull leonkielstra/devops-lab2
+
+# Run docker image
+docker run -p 8080:8080 leonkielstra/devops-lab2
+```
