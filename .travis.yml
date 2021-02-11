@@ -19,8 +19,8 @@ before_script:
 - node_modules/.bin/newman --version
 script:
 - python -m unittest discover
-- docker build -t swagger-spring-example:1.0.0 .
-- docker run --name example_api -d -t -p 127.0.0.1:8080:8080 swagger-spring-example:1.0.0
+- docker build -t $DOCKER_USER/devops-lab2:latest .
+- docker run --name example_api -d -t -p 127.0.0.1:8080:8080 $DOCKER_USER/devops-lab2:latest
 - docker ps
 - count=0 && until $(curl --output /dev/null --silent --head --fail http://localhost:8080);
   do printf '.' && sleep 3 && count=$((count+1)) && if [ $count -gt 5 ]; then break;
@@ -29,7 +29,7 @@ script:
 - node_modules/.bin/newman run swagger_server/test/postman_collection.json -e swagger_server/test/postman_environment.json
 after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
-- docker tag $DOCKER_USER/DevOpsLab2:latest $DOCKER_USER/devops-lab2:latest
+- docker tag $DOCKER_USER/devops-lab2:latest $DOCKER_USER/devops-lab2:latest
 - docker push $DOCKER_USER/devops-lab2:latest
 env:
   global:
