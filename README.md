@@ -58,3 +58,12 @@ docker pull leonkielstra/devops-lab2
 # Run docker image
 docker run -p 8080:8080 leonkielstra/devops-lab2
 ```
+
+## Run Postman tests
+```bash
+# install newman
+npm install newman@4.6.1
+
+# Run postman tests, make sure you have the api server running
+node_modules/.bin/newman run swagger_server/test/postman_collection.json -e swagger_server/test/postman_environment.json
+```
