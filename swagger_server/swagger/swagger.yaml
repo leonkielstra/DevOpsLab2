@@ -37,6 +37,32 @@ paths:
         "409":
           description: "already exists"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /student/:
+    get:
+      summary: "Get student by last name"
+      description: "Returns a single student"
+      operationId: "get_student_by_last_name"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "last_name"
+        in: "query"
+        description: "The student's last name"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "integer"
+            format: "int64"
+        "404":
+          description: "student not found"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
   /student/{student_id}:
     get:
       summary: "Find student by ID"
@@ -52,6 +78,11 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+      - name: "subject"
+        in: "query"
+        description: "The subject name"
+        required: false
+        type: "string"
       responses:
         "200":
           description: "successful operation"
